@@ -1,0 +1,99 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tech-custom-theme.scss";
+@import '~font-awesome/css/font-awesome.css';
+
+body {
+  margin: 0;
+}
+.margin-top {
+  margin-top: 16px;
+}
+.horizontal-padding {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+/* Scroll bar styling*/
+::-webkit-scrollbar {
+  width: 0px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* global image styling */
+img{
+  width: 100%;
+}
+
+/*
+global code syntax wrap styling
+ref: https://stackoverflow.com/questions/47377146/angular-material-5-show-full-text-in-mat-lists-word-wrap
+*/
+pre {
+  overflow: auto;
+  word-wrap: break-word !important;
+  /*white-space: pre-wrap !important;*/
+  border: solid #358ccb;
+  border-width: .1em .1em .1em .4em;
+  padding: .2em .6em;
+}
+table{
+  font-size: 14px;
+}
+
+/*
+Blockquote Styling
+ref: https://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/
+https://1stwebdesigner.com/css-snippets-blockquotes/
+*/
+blockquote:before, blockquote:after {
+  display: inline-block;
+  vertical-align: top;
+  height: 30px;
+  line-height: 48px;
+  font-size: 50px;
+  opacity: .2;
+}
+
+blockquote:before {
+  content: '\201C';
+  margin-right: 4px;
+  margin-left: -8px;
+}
+
+blockquote:after {
+  content: '\201D';
+  margin-left: 4px;
+  margin-right: -8px;
+}
+/*blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
+}*/

@@ -1,0 +1,47 @@
+<div *ngIf="relatedBlogs?.length > 0; else questionsTemplate">
+  <mat-toolbar class="tech-right-toolbar">
+    <span class="tech-primary-color">Related Blog</span>
+  </mat-toolbar>
+
+  <mat-card *ngFor="let blog of relatedBlogs" class="tech-right-card">
+    <mat-card-header style="margin-top: -30px;margin-bottom: -30px;margin-left: -35px;">
+      <div class="tech-right-card-item">
+        <mat-card-title style="font-size: 14px;">
+          <a [routerLink]="['./blog', blog?._id]">
+            <h5 class="tech-primary-color">
+              <i class="fa fa-question-circle"></i>
+              {{blog?.title}}
+            </h5>
+          </a>
+        </mat-card-title>
+        <mat-card-subtitle style="margin-top: -15px; font-size: 10px;">
+          <span>{{blog?.publishedOn | fromNow}}</span>
+        </mat-card-subtitle>
+      </div>
+    </mat-card-header>
+  </mat-card>
+</div>
+
+<ng-template #questionsTemplate>
+  <mat-toolbar class="tech-right-toolbar">
+    <span class="tech-primary-color">Latest Question</span>
+  </mat-toolbar>
+
+  <mat-card *ngFor="let question of questions$ | async" class="tech-right-card">
+    <mat-card-header style="margin-top: -30px;margin-bottom: -30px;margin-left: -35px;">
+      <div class="tech-right-card-item">
+        <mat-card-title style="font-size: 14px;">
+          <a [routerLink]="['./question', question?._id]">
+            <h5 class="tech-primary-color">
+              <i class="fa fa-question-circle"></i>
+              {{question?.title}}
+            </h5>
+          </a>
+        </mat-card-title>
+        <mat-card-subtitle style="margin-top: -15px; font-size: 10px;">
+          <span>{{question?.publishedOn | fromNow}}</span>
+        </mat-card-subtitle>
+      </div>
+    </mat-card-header>
+  </mat-card>
+</ng-template>

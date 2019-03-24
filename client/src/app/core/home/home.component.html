@@ -1,0 +1,47 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+
+  <div *ngIf="error; let blogError" fxFlexAlign="center" class="tech-blog-error">{{ blogError.error }}</div>
+  <div *ngIf="searching" class="tech-searching-spinner">
+    <mat-spinner [class.show]="searching" [diameter]="30" [strokeWidth]="3"></mat-spinner>
+    <span class="tech-searching-spinner-label">loading blog...</span>
+  </div>
+
+  <mat-card *ngFor="let blog of blogs" class="tech-home-card">
+    <a [routerLink]="['/blog', blog?._id]">
+      <h4>{{blog?.title}} </h4>
+      <mat-card-header class="tech-home-card-header">
+
+        <div *ngIf="utilService.getUserIcon(blog?.profile?.user) === ''; else userIconTemplate" mat-card-avatar class="tech-profile-image"></div>
+        <ng-template #userIconTemplate>
+          <div>
+            <img class="tech-user-image" mat-card-avatar src="{{utilService.getUserIcon(blog?.profile?.user)}}">
+          </div>
+        </ng-template>
+
+        <mat-card-title style="font-size: 12px;">
+          {{blog?.profile?.name}}
+          <small style="color: #585c6f;">
+            <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+            {{utilService.getUserDesignation(blog?.profile?.employments)}}
+            @{{utilService.getUserCompany(blog?.profile?.employments)}}
+          </small>
+        </mat-card-title>
+        <mat-card-subtitle style="color: #9594b1;font-size: 11px;">{{showSkillsWithHashTag(blog?.profile?.skills)}}</mat-card-subtitle>
+      </mat-card-header>
+    </a>
+    <hr>
+    <mat-card-content class="tech-card-content">
+      <div *ngIf="blog?.image">
+        <img src="{{blog?.image}}" style="width: 100%;" height="250px">
+      </div>
+
+      <span>
+        <div [innerHTML]="blog?.content.substring(0,600) | safeHtml"></div>
+      </span>
+    </mat-card-content>
+    <mat-card-actions style="margin-left: 0px;">
+      <button [routerLink]="['/blog', blog?._id]" mat-button color="primary">Read More</button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>

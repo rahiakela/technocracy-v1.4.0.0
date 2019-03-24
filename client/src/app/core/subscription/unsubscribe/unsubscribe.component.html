@@ -1,0 +1,34 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+
+  <mat-card class="tech-unsubscribe-card" style="margin-top: 3px;">
+
+    <mat-card-header class="tech-unsubscribe-card-header">
+      <mat-card-title>
+        <h5>Unsubscribe for Technocracy Blog Community!</h5>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="tech-card-content">
+      <form [formGroup]="unsubscribeForm" class="tech-unsubscribe-form">
+        <mat-form-field>
+          <input matInput [formControl]="email" placeholder="Enter your email to unsubscribe" aria-label="Email">
+          <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <p *ngIf="unsubscribed">You have un-subscribed successfully from Technocracy Blog Community.</p>
+
+        <div>
+          <div *ngIf="loading | async" class="tech-unsubscribe-loading">
+            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+          </div>
+          <div *ngIf="error | async" fxFlexAlign="center" class="tech-unsubscribe-error">
+            <span style="color: red;">An error has occurred while saving your subscription.</span>
+          </div>
+        </div>
+
+        <button (click)="unsubscribe()" [disabled]="!email.valid" mat-raised-button color="primary">Un-subscribe</button>
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+</div>

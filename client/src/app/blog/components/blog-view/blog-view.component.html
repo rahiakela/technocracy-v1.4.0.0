@@ -1,0 +1,87 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+
+  <mat-card class="tech-blog-card" style="margin-bottom: 5px;">
+    <h4>{{blog?.title}} </h4>
+    <mat-card-header class="tech-blog-card-header">
+
+      <div *ngIf="utilService.getUserIcon(blog?.profile?.user) === ''; else userIconTemplate" mat-card-avatar class="tech-profile-image"></div>
+      <ng-template #userIconTemplate>
+        <div>
+          <img class="tech-user-image" mat-card-avatar src="{{utilService.getUserIcon(blog?.profile?.user)}}">
+        </div>
+      </ng-template>
+
+      <mat-card-title style="font-size: 12px;">
+        {{blog?.profile?.name}}
+        <small style="color: #585c6f;">
+          <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+          {{utilService.getUserDesignation(blog?.profile?.employments)}}
+          @{{utilService.getUserCompany(blog?.profile?.employments)}}
+        </small>
+      </mat-card-title>
+      <mat-card-subtitle style="color: #9594b1;font-size: 11px;">
+        <span *ngFor="let tag of blog?.tags">
+          <i class="fa fa-tag" aria-hidden="true">{{tag}}</i>
+        </span>
+      </mat-card-subtitle>
+      <mat-card-subtitle style="color: #c1bbcc;font-size: 11px;">
+        Last Updated: {{blog?.updatedOn ? formatDate(blog?.updatedOn) : formatDate(blog?.createdOn)}}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <div class="tech-inline-share-box">
+      <tech-share [shareType]="'blog'" [data]="blog"></tech-share>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!--<ng-adsense></ng-adsense>-->
+    <tech-ad-sense></tech-ad-sense>
+
+    <mat-card-content class="tech-card-content">
+      <div [innerHTML]="blog?.content | safeHtml"></div>
+    </mat-card-content>
+
+    <!--Blogger's Profile and skills-->
+    <tech-author [blog]="blog"></tech-author>
+
+    <mat-card-actions>
+      <button (click)="like()" mat-button color="primary">
+        <mat-icon>thumb_up_alt</mat-icon> {{blog?.likes?.length}} Like
+      </button>
+      <button (click)="addComment()" mat-button color="primary">
+        <mat-icon>chat</mat-icon> {{blog?.comments?.length}} Comment
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div *ngIf="utilService.isAuthenticated()" class="tech-comment-editor">
+    <mat-card class="tech-comment-editor-card">
+      <h4><i class="fa fa-pencil-square-o"></i> Write Comment</h4>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div id="richTextEditor" #richTextEditor>
+          <tech-editor
+            [contentId]="blog?._id"
+            [editorType]="'comment'"
+            [placeHolder]="'Write your comment here...'"
+            [content]="contentToUpdate"
+            (onEditorContentChange)="editorContentHandler($event)"
+          >
+          </tech-editor>
+        </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <mat-card-actions class="tech-comment-editor-card-footer">
+          <mat-checkbox [(ngModel)]="notification" aria-label="Notification">Send me notification</mat-checkbox>
+          <button class="tech-comment-editor-button" (click)="addComment()" mat-button color="primary">
+            Add comment
+          </button>
+        </mat-card-actions>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+
+  <!--Comment Section-->
+  <tech-comments [comments]="blog?.comments" (onCommentActionTriggered)="commentActionHandler($event)"></tech-comments>
+</div>
