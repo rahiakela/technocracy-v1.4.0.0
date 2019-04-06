@@ -34,6 +34,8 @@ import {
 import {UserAuthObserver} from './observer/user-auth-observer';
 import {SubscribeComponent} from './subscription/subscribe/subscribe.component';
 import {UnsubscribeComponent} from './subscription/unsubscribe/unsubscribe.component';
+import {MainLayoutComponent, SubscriptionDialogComponent} from './layout/main-layout/main-layout.component';
+import {ExtendedModule} from "@angular/flex-layout";
 
 // ref: https://www.npmjs.com/package/ng-recaptcha
 const GLOBAL_RECAPTCHA_SETTINGS: RecaptchaSettings = { siteKey: '6LdMVz4UAAAAAClv3WheCRrgtoDyPUtFfGhikGu4' };
@@ -71,14 +73,17 @@ export function socialConfig() {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
     AppMaterialModule,
-    SharedModule
+    SharedModule,
+    ExtendedModule
   ],
   declarations: [
+    MainLayoutComponent,
     HomeComponent,
     PageNotFoundComponent,
     HomeContainerComponent,
     RightSideBarComponent,
     LeftSideBarComponent,
+    SubscriptionDialogComponent,
     LoginComponent,
     SignupComponent,
     ForgotPassComponent,
@@ -92,7 +97,7 @@ export function socialConfig() {
     UnsubscribeComponent
   ],
   // Mat Dialog entry components config
-  entryComponents: [SignupComponent, TermsAndConditionsComponent, PrivacyPolicyComponent],
+  entryComponents: [SubscriptionDialogComponent, SignupComponent, TermsAndConditionsComponent, PrivacyPolicyComponent],
   exports: [
     RightSideBarComponent,
     LeftSideBarComponent,

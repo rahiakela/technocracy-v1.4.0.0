@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
 
   setMetaData(blogs: Blog[]) {
     const description = `Showing ${blogs.length} blogs.`;
-    const title = 'Blog List';
+    const title = 'Home';
 
     this.metaService.setMetaData({description, title});
   }

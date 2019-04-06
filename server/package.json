@@ -25,6 +25,7 @@
     "@nestjs/jwt": "^0.2.1",
     "@nestjs/passport": "^5.1.0",
     "bayes-classifier": "0.0.5",
+    "cache-manager": "^2.9.0",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
     "dotenv": "^6.2.0",

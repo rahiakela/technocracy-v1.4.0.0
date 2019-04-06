@@ -71,16 +71,17 @@ mongorestore -h ds147265.mlab.com:47265 -d technocracy_aws_dev -u <user> -p <pas
 
 #####################Importing/Exporting Database on Digital Ocean Prod Server###################
 Step-1: Exporting data from Digital Ocean Prod Database
-mongodump -h 139.59.84.105:27017 -d technocracy_prod_server -u <user> -p <password> -o tech.bson
+mongodump -h 139.59.84.105:27017 -d technocracy_mongo_v1_3_0 -u <user> -p <password> -o tech.bson
 
 Step-2: Importing data to Digital Ocean Prod Database
-mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_2_0 -u <user> -p <password> <input .bson file>
-mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_2_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\blogs.bson
-mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_2_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\questions.bson
-mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_2_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\users.bson
-mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_2_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\profiles.bson
-mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_2_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\comments.bson
-mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_2_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\replies.bson
+mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_4_0 -u <user> -p <password> <input .bson file>
+mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_4_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\blogs.bson
+mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_4_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\questions.bson
+mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_4_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\users.bson
+mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_4_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\profiles.bson
+mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_4_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\comments.bson
+mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_4_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\replies.bson
+mongorestore -h 139.59.84.105:27017 -d technocracy_mongo_v1_4_0 -u <user> -p <password> tech.bson\technocracy_aws_dev\subscriptions.bson
 
 ###################### Rename Collection Field Name#################
 db.getCollection('<Collection_Name>').updateMany( {}, { $rename: { "<Field_Old_Name>": "<Field_New_Name>" } })

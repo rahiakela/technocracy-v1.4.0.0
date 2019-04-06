@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+import {CacheInterceptor, CacheModule, Module} from '@nestjs/common';
+import {APP_INTERCEPTOR} from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -17,6 +18,7 @@ const MONGO_URI = ENV.NODE_ENV.match('prod') ? ENV.PROD_DO_MONGODB_URI : ENV.DEV
 @Module({
   imports: [
       MongooseModule.forRoot(MONGO_URI),
+      CacheModule.register(),
       BlogModule,
       QuestionModule,
       ProfileModule,
@@ -25,6 +27,12 @@ const MONGO_URI = ENV.NODE_ENV.match('prod') ? ENV.PROD_DO_MONGODB_URI : ENV.DEV
       CommentModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UtilsService],
+  providers: [
+      AppService, UtilsService,
+      {
+          provide: APP_INTERCEPTOR,
+          useClass: CacheInterceptor,
+      },
+  ],
 })
 export class AppModule {}

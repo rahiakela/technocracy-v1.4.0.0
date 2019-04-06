@@ -46,3 +46,5 @@
 # package lock file
 */package-lock.json
 */src/environments/**
+*/src/config/environment-variables.ts
+*/.env

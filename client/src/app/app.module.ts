@@ -6,7 +6,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {APP_ID, Inject, NgModule, PLATFORM_ID} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import {AppComponent, SubscriptionDialogComponent} from './app.component';
+import {AppComponent} from './app.component';
 import {isPlatformBrowser} from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
@@ -19,8 +19,7 @@ import {CookieModule} from 'ngx-cookie';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SubscriptionDialogComponent
+    AppComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -37,9 +36,6 @@ import {CookieModule} from 'ngx-cookie';
     CoreModule,
     AppMaterialModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-  ],
-  entryComponents: [
-    SubscriptionDialogComponent
   ],
   providers: [
     // httpInterceptorProviders
